@@ -27,8 +27,8 @@ export default function RootLayout({
           </div>
         </header>
 
-        {/* Contenido principal */}
-        <main className="flex-1">{children}</main>
+        {/* Contenido principal con min-h-screen para que layouts anidados puedan ocupar toda la altura */}
+        <main className="flex-1 min-h-screen">{children}</main>
 
         {/* Footer común */}
         <footer className="w-full py-4 bg-gray-100 text-gray-500 flex justify-center items-center text-sm">
