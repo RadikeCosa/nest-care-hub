@@ -1,26 +1,24 @@
 // PatientBasicForm.tsx
 "use client";
+
 import React, { useState, useTransition } from "react";
 import InputField from "@/components/ui/inputField";
 import Button from "@/components/ui/button";
-import { savePatient } from "@/lib/actions/patientActions";
-
-interface FormState {
-  success: boolean | null;
-  message: string;
-  errors?: Record<string, string>;
-}
+import { addPatient, type State } from "@/lib/actions/patientActions";
 
 const PatientBasicForm = () => {
-  const [formState, setFormState] = useState<FormState>({
-    success: null,
+  const [formState, setFormState] = useState<State>({
+    success: false,
     message: "",
   });
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (formData: FormData) => {
     startTransition(async () => {
-      const result = await savePatient(formData);
+      // Crear un estado inicial para pasar a addPatient
+      const initialState: State = { success: false, message: "" };
+
+      const result = await addPatient(initialState, formData);
       setFormState(result);
 
       // Solo limpiar el formulario si fue exitoso
@@ -30,7 +28,7 @@ const PatientBasicForm = () => {
 
         // Limpiar mensaje de éxito después de 3 segundos
         setTimeout(() => {
-          setFormState({ success: null, message: "" });
+          setFormState({ success: false, message: "" });
         }, 3000);
       }
       // Si hay errores, NO limpiamos el formulario para preservar los datos
@@ -57,11 +55,10 @@ const PatientBasicForm = () => {
       <form action={handleSubmit}>
         <InputField
           label="Nombre completo"
-          name="fullName"
+          name="full_name"
           placeholder="Ej: Juan Pérez"
           autoComplete="name"
           required
-          error={formState.errors?.fullName}
         />
         <InputField
           label="DNI"
@@ -69,15 +66,16 @@ const PatientBasicForm = () => {
           placeholder="Ej: 12345678"
           type="text"
           inputMode="numeric"
+          pattern="[0-9]*"
+          maxLength={9}
           required
-          error={formState.errors?.dni}
         />
         <InputField
           label="Fecha de nacimiento"
-          name="birthDate"
+          name="birth_date"
           type="date"
+          max={new Date().toISOString().split("T")[0]} // Evita fechas futuras
           required
-          error={formState.errors?.birthDate}
         />
 
         <Button
