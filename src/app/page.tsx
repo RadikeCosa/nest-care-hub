@@ -25,6 +25,12 @@ export default function Home() {
           >
             ➕ Agregar paciente
           </Link>
+          <Link
+            href="/"
+            className="block w-full bg-primary-100 text-primary-700 hover:bg-primary-200 hover:text-primary-900 transition rounded-lg px-6 py-4 font-semibold text-lg shadow-sm border border-primary-200"
+          >
+            Ver pacientes
+          </Link>
           {/* Ejemplo de futuros links */}
           {/* <Link
             href="/patients"
