@@ -5,13 +5,11 @@ import { supabase } from "@/lib/supabase";
 import { patientSchema, patientUpdateSchema } from "@/schemas/patient.schema";
 import { revalidatePath } from "next/cache";
 
-// Tipo exportado para reusarlo en el componente cliente
 export type State = {
   success: boolean;
   message: string;
 };
 
-// Tipo para Patient actualizado según la nueva estructura
 export type Patient = {
   id: string;
   full_name: string;

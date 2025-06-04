@@ -8,7 +8,7 @@ const navLinks = [
   { href: "/", label: "Home", emoji: "🏠" },
   { href: "/patients", label: "Patients", emoji: "👥" },
   /* { href: "/caregivers", label: "Caregivers", emoji: "🧑‍⚕️" }, */
-  { href: "/settings", label: "Settings", emoji: "⚙️" },
+  { href: "/add-patient", label: "Add Patient", emoji: "➕" },
 ];
 
 interface SideNavProps {
@@ -51,8 +51,8 @@ export default function SideNav({ sidebarOpen, setSidebarOpen }: SideNavProps) {
                 flex items-center gap-3 px-4 py-3 rounded-md font-semibold transition-colors
                 ${
                   isActive
-                    ? "bg-primary-500 text-white"
-                    : "text-gray-700 hover:bg-primary-100 hover:text-primary-700"
+                    ? "bg-gray-500 text-white hover:text-blue-200"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-700"
                 }
               `}
               onClick={() => setSidebarOpen(false)} // Cierra menú en móvil al clickear

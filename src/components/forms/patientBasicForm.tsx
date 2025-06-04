@@ -21,7 +21,6 @@ const PatientBasicForm = () => {
       const result = await addPatient(initialState, formData);
       setFormState(result);
 
-      // Solo limpiar el formulario si fue exitoso
       if (result.success) {
         const form = document.querySelector("form") as HTMLFormElement;
         form?.reset();
@@ -31,12 +30,11 @@ const PatientBasicForm = () => {
           setFormState({ success: false, message: "" });
         }, 3000);
       }
-      // Si hay errores, NO limpiamos el formulario para preservar los datos
     });
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+    <div className="p-6 shadow-md">
       {/* Mensaje de estado - espacio reservado */}
       <div className="mb-4 h-12 flex items-center">
         <div
@@ -81,7 +79,7 @@ const PatientBasicForm = () => {
         <Button
           type="submit"
           variant="primary"
-          className="w-full mt-4"
+          className="w-50 mt-4"
           disabled={isPending}
         >
           {isPending ? "Guardando..." : "Guardar paciente"}
