@@ -23,7 +23,7 @@ const PatientBasicForm = () => {
       const result = await savePatient(formData);
       setFormState(result);
 
-      // Si fue exitoso, limpiar el formulario
+      // Solo limpiar el formulario si fue exitoso
       if (result.success) {
         const form = document.querySelector("form") as HTMLFormElement;
         form?.reset();
@@ -33,23 +33,26 @@ const PatientBasicForm = () => {
           setFormState({ success: null, message: "" });
         }, 3000);
       }
+      // Si hay errores, NO limpiamos el formulario para preservar los datos
     });
   };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-      {/* Mensaje de estado */}
-      {formState.message && (
+      {/* Mensaje de estado - espacio reservado */}
+      <div className="mb-4 h-12 flex items-center">
         <div
-          className={`mb-4 p-3 rounded-md text-sm font-medium ${
-            formState.success
-              ? "bg-green-50 text-green-800 border border-green-200"
-              : "bg-red-50 text-red-800 border border-red-200"
+          className={`w-full p-3 rounded-md text-sm font-medium transition-opacity duration-300 ease-in-out border ${
+            formState.message
+              ? formState.success
+                ? "bg-green-50 text-green-800 border-green-200 opacity-100"
+                : "bg-red-50 text-red-800 border-red-200 opacity-100"
+              : "bg-transparent border-transparent opacity-0"
           }`}
         >
-          {formState.message}
+          {formState.message || "\u00A0"}
         </div>
-      )}
+      </div>
 
       <form action={handleSubmit}>
         <InputField
