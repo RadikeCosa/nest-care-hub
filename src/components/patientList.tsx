@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { usePatients } from "@/lib/hooks/usePatients";
 import { Patient } from "@/lib/actions/patientActions";
 import PatientFilters from "@/components/patientFilters";
@@ -12,14 +13,18 @@ interface PatientListProps {
 }
 
 export default function PatientList({ onPatientSelect }: PatientListProps) {
+  const router = useRouter();
   const { patients, loading, error, filter, setFilter } = usePatients();
 
   const handlePatientClick = (patient: Patient) => {
+    // Si hay una función de callback personalizada, la ejecutamos
     if (onPatientSelect) {
       onPatientSelect(patient);
+      return;
     }
-    // Aquí podrías agregar navegación o abrir un modal
-    console.log("Paciente seleccionado:", patient);
+
+    // Por defecto, navegamos a la página de detalle
+    router.push(`/patients/${patient.id}`);
   };
 
   return (

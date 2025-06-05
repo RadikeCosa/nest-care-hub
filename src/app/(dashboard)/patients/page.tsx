@@ -1,3 +1,4 @@
+// src/app/(dashboard)/patients/page.tsx
 import PatientList from "@/components/patientList";
 
 export default function PatientsPage() {
