@@ -11,6 +11,8 @@ export default function Footer() {
         <Link
           href="https://nest-care-docs.vercel.app/"
           className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Docs
         </Link>
