@@ -17,6 +17,12 @@ export default function Home() {
         >
           👥 View Patients
         </Link>
+        <Link
+          href="https://nest-care-docs.vercel.app/"
+          className="block w-full bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition rounded-lg px-6 py-4 font-semibold text-lg shadow-lg border border-gray-200"
+        >
+          📘 Documentation
+        </Link>
       </nav>
     </div>
   );
