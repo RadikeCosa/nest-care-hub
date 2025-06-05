@@ -4,15 +4,16 @@ import { getPatientById } from "@/lib/actions/patientActions";
 import PatientDetailView from "@/components/patientDetailView";
 
 interface PatientDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PatientDetailPage({
   params,
 }: PatientDetailPageProps) {
-  const patient = await getPatientById(params.id);
+  const { id } = await params;
+  const patient = await getPatientById(id);
 
   if (!patient) {
     notFound();
